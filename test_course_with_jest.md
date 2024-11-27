@@ -1,4 +1,4 @@
- ### Cours détaillé sur les tests avec Jest (TypeScript)
+ ### Doc personnel détaillé sur les tests avec Jest (TypeScript)
 
 Jest est un framework de tests JavaScript/TypeScript populaire pour tester du code frontend et backend. Il est utilisé pour vérifier que votre code fonctionne comme attendu. Voici un guide détaillé pour apprendre Jest avec TypeScript.
 
