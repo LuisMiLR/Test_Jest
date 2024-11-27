@@ -1,4 +1,4 @@
-### Doc personnel détaillé sur les tests avec Jest (TypeScript)
+### **Doc personnel détaillé sur les tests avec Jest (TypeScript)**
 
 Jest est un framework de tests JavaScript/TypeScript populaire pour tester du code frontend et backend. Il est utilisé pour vérifier que votre code fonctionne comme attendu. Voici un guide détaillé pour apprendre Jest avec TypeScript.
 
@@ -14,25 +14,113 @@ Jest est conçu pour :
 
 ---
 
+Voici une mise à jour de la documentation au **point 2**, incluant les deux méthodes pour configurer le fichier `tsconfig.json`. Cela offre aux utilisateurs une vue d'ensemble et leur permet de choisir la méthode qui convient le mieux à leur projet.
+
+---
+
 ### **2. Configuration de Jest avec TypeScript**
 
-#### Étape 1 : Installer les dépendances
+Vous devez configurer TypeScript pour fonctionner avec Jest. Voici deux méthodes : une approche générique pour configurer TypeScript, et une autre spécifique à Jest.
 
-```bash
-npm install --save-dev jest ts-jest @types/jest typescript
-```
+Quand utiliser tsc --init ou npx ts-jest config:init ?
 
-#### Étape 2 : Initialiser un fichier de configuration Jest
+Utilisez la methode 1:  tsc --init :
 
-```bash
-npx ts-jest config:init
-```
+- Vous démarrez un projet TypeScript général et voulez une configuration complète.
+- Vous souhaitez explorer ou personnaliser toutes les options TypeScript disponibles.
 
-Cela crée un fichier `jest.config.js`.
+Utilisez npx ts-jest config:init si :
+
+- Vous configurez rapidement Jest avec TypeScript.
+- Vous voulez une solution minimaliste axée sur les tests.
+
+---
+
+#### **Méthode 1 : Configuration manuelle avec `tsc --init`**
+
+Cette méthode génère un fichier `tsconfig.json` détaillé que vous pouvez personnaliser selon vos besoins.
+
+1. **Exécutez la commande suivante** :
+   ```bash
+   tsc --init
+   ```
+
+2. **Un fichier `tsconfig.json` sera généré**. Voici les options importantes à activer pour Jest :
+
+   ```json
+   {
+     "compilerOptions": {
+       "target": "es6",                       /* Cible de compilation : ES6 */
+       "module": "commonjs",                  /* Module compatible avec Jest */
+       "strict": true,                        /* Activer les vérifications strictes */
+       "esModuleInterop": true,               /* Interopérabilité ESModule/CommonJS */
+       "skipLibCheck": true,                  /* Ignorer la vérification des fichiers de déclaration */
+       "forceConsistentCasingInFileNames": true, /* Assurer la cohérence des noms de fichiers */
+       "outDir": "./dist"                     /* Répertoire de sortie pour les fichiers compilés */
+     },
+     "exclude": ["node_modules", "**/*.test.ts"]
+   }
+   ```
+
+3. **Ajoutez des personnalisations selon vos besoins** :
+   - Par exemple, vous pouvez activer `"sourceMap": true` pour faciliter le débogage.
+   - Assurez-vous que `"module"` est configuré sur `"commonjs"` pour Jest.
+
+---
+
+#### **Méthode 2 : Configuration rapide avec `npx ts-jest config:init`**
+
+Cette méthode est idéale si vous configurez Jest rapidement pour TypeScript.
+
+1. **Installez les dépendances nécessaires** :
+   ```bash
+   npm install --save-dev jest ts-jest @types/jest typescript
+   ```
+
+2. **Exécutez la commande suivante pour initialiser la configuration** :
+   ```bash
+   npx ts-jest config:init
+   ```
+
+3. **Cette commande génère deux fichiers** :
+   - `jest.config.js` : Configuration spécifique à Jest.
+   - `tsconfig.json` : Configuration minimale pour Jest avec TypeScript.
+
+   Voici un exemple de fichier généré :
+
+   ```json
+   {
+     "compilerOptions": {
+       "module": "commonjs",
+       "esModuleInterop": true,
+       "strict": true
+     }
+   }
+   ```
+
+   Ce fichier est suffisant pour démarrer vos tests avec Jest.
+
+---
+
+#### **Quelle méthode choisir ?**
+
+- **Méthode 1 : `tsc --init`**
+  - Utilisée pour un projet TypeScript général.
+  - Fournit un fichier détaillé, idéal si vous voulez explorer ou personnaliser toutes les options TypeScript.
+
+- **Méthode 2 : `npx ts-jest config:init`**
+  - Recommandée pour les projets axés sur Jest.
+  - Rapide et prête à l'emploi, avec un fichier `tsconfig.json` adapté aux tests.
+
+---
+
+
+Vous pouvez choisir l'une ou l'autre méthode selon vos besoins. Si vous configurez Jest pour TypeScript, la **méthode 2** est souvent plus rapide. Cependant, pour une configuration TypeScript complète et générique, la **méthode 1** reste plus flexible.
+
 
 #### Étape 3 : Configurer TypeScript
 
-Ajoutez ou modifiez le fichier `tsconfig.json` pour inclure :
+Ajoutez ou modifiez le fichier `tsconfig.json` pour inclure (si methode 2):
 
 ```json
 {
@@ -44,6 +132,21 @@ Ajoutez ou modifiez le fichier `tsconfig.json` pour inclure :
   }
 }
 ```
+
+#### Étape 4 : Ajouter des scripts dans `package.json`
+
+Dans votre fichier `package.json`, ajoutez les scripts suivants pour exécuter et surveiller vos tests :
+
+```json
+"scripts": {
+  "test": "jest --watchAll",
+  "build": "tsc"
+}
+```
+
+Ces scripts permettent :
+- **`test`** : Lancer Jest avec `--watchAll` pour surveiller les fichiers et relancer les tests automatiquement.
+- **`build`** : Compiler le code TypeScript en JavaScript.
 
 ---
 
