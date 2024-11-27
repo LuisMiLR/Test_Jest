@@ -18,21 +18,13 @@ Voici une mise à jour de la documentation au **point 2**, incluant les deux mé
 
 ---
 
+Vous avez tout à fait raison ! Pour la **Méthode 1**, il est également nécessaire d’installer les dépendances comme dans la Méthode 2. Sans ces dépendances, Jest ne pourra pas fonctionner correctement avec TypeScript. Voici la version corrigée de votre documentation pour clarifier cela :
+
+---
+
 ### **2. Configuration de Jest avec TypeScript**
 
 Vous devez configurer TypeScript pour fonctionner avec Jest. Voici deux méthodes : une approche générique pour configurer TypeScript, et une autre spécifique à Jest.
-
-Quand utiliser tsc --init ou npx ts-jest config:init ?
-
-Utilisez la methode 1:  tsc --init :
-
-- Vous démarrez un projet TypeScript général et voulez une configuration complète.
-- Vous souhaitez explorer ou personnaliser toutes les options TypeScript disponibles.
-
-Utilisez npx ts-jest config:init si :
-
-- Vous configurez rapidement Jest avec TypeScript.
-- Vous voulez une solution minimaliste axée sur les tests.
 
 ---
 
@@ -40,12 +32,17 @@ Utilisez npx ts-jest config:init si :
 
 Cette méthode génère un fichier `tsconfig.json` détaillé que vous pouvez personnaliser selon vos besoins.
 
-1. **Exécutez la commande suivante** :
+1. **Installez les dépendances nécessaires** :
+   ```bash
+   npm install --save-dev jest ts-jest @types/jest typescript
+   ```
+
+2. **Initialisez le fichier `tsconfig.json` avec la commande suivante** :
    ```bash
    tsc --init
    ```
 
-2. **Un fichier `tsconfig.json` sera généré**. Voici les options importantes à activer pour Jest :
+3. **Un fichier `tsconfig.json` sera généré**. Voici les options importantes à activer pour Jest :
 
    ```json
    {
@@ -62,8 +59,8 @@ Cette méthode génère un fichier `tsconfig.json` détaillé que vous pouvez pe
    }
    ```
 
-3. **Ajoutez des personnalisations selon vos besoins** :
-   - Par exemple, vous pouvez activer `"sourceMap": true` pour faciliter le débogage.
+4. **Ajoutez des personnalisations selon vos besoins** :
+   - Activez `"sourceMap": true` pour faciliter le débogage.
    - Assurez-vous que `"module"` est configuré sur `"commonjs"` pour Jest.
 
 ---
@@ -86,7 +83,7 @@ Cette méthode est idéale si vous configurez Jest rapidement pour TypeScript.
    - `jest.config.js` : Configuration spécifique à Jest.
    - `tsconfig.json` : Configuration minimale pour Jest avec TypeScript.
 
-   Voici un exemple de fichier généré :
+4. **Voici un exemple de fichier `tsconfig.json` généré** :
 
    ```json
    {
@@ -102,7 +99,7 @@ Cette méthode est idéale si vous configurez Jest rapidement pour TypeScript.
 
 ---
 
-#### **Quelle méthode choisir ?**
+### **Quelle méthode choisir ?**
 
 - **Méthode 1 : `tsc --init`**
   - Utilisée pour un projet TypeScript général.
@@ -114,7 +111,7 @@ Cette méthode est idéale si vous configurez Jest rapidement pour TypeScript.
 
 ---
 
-
+Que vous choisissiez l'une ou l'autre méthode, n'oubliez pas d'installer les dépendances nécessaires (`jest`, `ts-jest`, `@types/jest`, et `typescript`). 
 Vous pouvez choisir l'une ou l'autre méthode selon vos besoins. Si vous configurez Jest pour TypeScript, la **méthode 2** est souvent plus rapide. Cependant, pour une configuration TypeScript complète et générique, la **méthode 1** reste plus flexible.
 
 
